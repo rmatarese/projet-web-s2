@@ -4,6 +4,7 @@
 --
 -- Host: localhost:3306
 -- Generation Time: Apr 17, 2023 at 01:16 PM
+-- Generation Time: Apr 17, 2023 at 01:43 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -30,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `bar` (
   `IdBar` int(11) NOT NULL,
   `NomBar` varchar(64) NOT NULL,
-  `AdresseBar` varchar(64) NOT NULL
+  `AdresseBar` varchar(64) NOT NULL,
+  `Villebar` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
