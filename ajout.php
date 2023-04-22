@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Exécuter la requête SQL
     if (mysqli_query($conn, $sql)) {
-        echo "Les informations du bar ont été enregistrées avec succès.Merci beaucoup pour votre participation !";
+        echo "Les informations du bar ont été enregistrées avec succès. Merci beaucoup pour votre participation !";
     } else {
         echo "Erreur: " . $sql . "<br>" . mysqli_error($conn);
     }

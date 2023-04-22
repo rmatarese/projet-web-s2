@@ -8,20 +8,7 @@ if(!isset($_SESSION['username'])){
 ?>
 <DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Page client</title>
-</head>
-<body>
-    <h1>Page client</h1>
-    <p>Bienvenue sur votre page client. Vous pouvez ajouter un bar à notre liste.</p>
-    <a href="ajout_bar.php">Ajouter un bar</a>
-    <a href="deconnexion.php">Se déconnecter</a>
-</body>
-</html>
-
-
-<form action="look.php" method="POST">
+<form action="ajout.php" method="POST">
   <label for="bar-id">ID du bar:</label>
   <input type="text" id="bar-id" name="bar-id" required><br><br>
   
@@ -34,7 +21,7 @@ if(!isset($_SESSION['username'])){
   <label for="bar-address">Adresse du bar:</label>
   <input type="text" id="bar-address" name="bar-address" required><br><br>
   
-  <input type="submit" value="Rechercher">
+  <input type="submit" value="Envoyer">
 </form>
-
+</html>
 
