@@ -7,7 +7,7 @@ $password = "root";
 $database = "alabar";
 
 if(!isset($_SESSION['username'])){
-    header("Location: login.php");
+    header("Location: connexion.php");
 }
 $conn= new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
