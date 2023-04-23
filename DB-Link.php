@@ -10,4 +10,12 @@ if (!$conn) {
     echo "Erreur de connexion".mysqli_connect_errno();
     die();
 }
+
+function valider_donnees($donnees){
+    $donnees=trim($donnees);
+    $donnees=stripslashes($donnees);
+    $donnees=htmlspecialchars($donnees);
+    return $donnees;
+}
+
 ?>

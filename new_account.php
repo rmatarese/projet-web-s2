@@ -18,12 +18,12 @@ if (isset($_SESSION['user_id'])) {
 // Traitement du formulaire d'inscription
 if (isset($_POST['register'])) {
   // Récupérer les informations du formulaire
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  $confirm_password = $_POST['confirm_password'];
-  $prenom = $_POST['prenom'];
-  $date = $_POST['date'];
-  $email = $_POST['email'];
+  $username = valider_donnees($_POST['username']);
+  $password = valider_donnees($_POST['password']);
+  $confirm_password = valider_donnees($_POST['confirm_password']);
+  $prenom = valider_donnees($_POST['prenom']);
+  $date = valider_donnees($_POST['date']);
+  $email = valider_donnees($_POST['email']);
 
   // Valider les informations du formulaire
   $errors = array();
@@ -64,8 +64,7 @@ if ($password != $confirm_password) {
     $query = "INSERT INTO client (Nom, password, Prenom, DateNaissance, email, perm) VALUES (:Nom, :password, :Prenom, :DateNaissance, :email, 'client')";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':Nom', $username);
-    $hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt->bindParam(':password', $hash);
+    $stmt->bindParam(':password', $password);
     $stmt->bindParam(':Prenom',$prenom);
     $stmt->bindParam('DateNaissance',$date);
     $stmt->bindParam('email',$email);

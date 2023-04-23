@@ -55,8 +55,8 @@
 // Traitement du formulaire de connexion
 if (isset($_POST['login'])) {
 	// Récupérer les identifiants du formulaire
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$username = valider_donnees($_POST['username']);
+	$password = valider_donnees($_POST['password']);
 
 	// Requête pour vérifier les identifiants
 	$requete="SELECT Id, password,perm FROM client WHERE Nom = '$username'"; 
