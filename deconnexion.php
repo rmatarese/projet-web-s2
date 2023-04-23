@@ -6,6 +6,7 @@
     $query = "SELECT * FROM $table";
     $stmt = $conn->prepare($query);
     $stmt->execute();
+    session_start();
     setcookie('user_id', '', time() - 3600, '/');
     session_destroy();
     echo 'Vous avez bien été déconnecté';

@@ -16,25 +16,20 @@
     <div class="error"><?php echo $error; ?></div>
   <?php endif; ?>
 
-  <?php
-	if(isset($_COOKIE['user_id'])){
-		echo "vous êtes déjà connecté";
-		echo "Souhaitez-vous vous déconnecter ?";
-		echo "<a href='deconnexion.php'> Déconnexion </a>";
-	}
-  ?>
+
 
   <?php
 	require("DB-Link.php");
+	session_start();
 ?>
 
   <?php
   // Vérifier si l'utilisateur est déjà connecté
 
 	/* Cas où l'utilisateur est déjà connecté*/
-	if (isset($_SESSION['user_id'])) {
+	if (isset($_COOKIE['user_id'])) {
 		echo "Bonjour, vous êtes déjà connecté en tant que ".$_SESSION['username'].". ";
-		echo "Vous pouvez vous déconnecter ou revenir sur la page d'acceuil";
+		echo "Vous pouvez vous déconnecter ou revenir sur la page d'acceuil \n";
 		echo "<a href='deconnexion.php'>Déconnexion</a>";
 		echo "<a href=acceuil.php>";
 		exit();
@@ -74,6 +69,7 @@ if (isset($_POST['login'])) {
 	// Vérifier si les identifiants sont corrects
 	if (isset($user)) {
 	  // Stocker les informations de l'utilisateur en session
+
 	  $_SESSION['user_id'] = $user['Id'];
 	  $_SESSION['username'] = $user['Nom'];
 	  $_SESSION['user_type'] = $user['perm'];
@@ -81,13 +77,12 @@ if (isset($_POST['login'])) {
 	  // Créer le cookie
   	  setcookie('user_id', $user['Id'], time() + 24*3600*7, '/');
 
-	
   
 	  // Rediriger vers la page appropriée
 	  if ($user['perm'] == 'admin') {
 		header("Location: page_admin.php");
 	  } else {
-		//header("Location: page_client.php");
+		header("Location: page_client.php");
 		echo isset($_SESSION['username']);
 	  }
 	  exit();
