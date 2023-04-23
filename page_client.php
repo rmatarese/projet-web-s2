@@ -1,19 +1,11 @@
 
 <?PHP
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$database = "alabar";
-
+require("DB-Link.php");
+// Vérifier si l'utilisateur est déjà connecté
 if(!isset($_SESSION['username'])){
-    header("Location: connexion.php");
+    header("Location: accueil.php");
 }
-$conn= new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$statement = $conn->prepare("SELECT * FROM client WHERE username = :username");
-$statement->bindParam(':username', $_SESSION['username']);
-
 ?>
 <DOCTYPE html>
 <html>
