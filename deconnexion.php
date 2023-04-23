@@ -1,4 +1,12 @@
 <!DOCTYPE HTML>
+
+<html>
+<head>
+  <title>Connexion</title>
+  <link rel="stylesheet" type="text/css" href="deconnexion_style.css">
+</head>
+</html>
+
 <?php
     require("DB-Link.php");
     // Sélection de la table "client"
@@ -9,6 +17,12 @@
     session_start();
     setcookie('user_id', '', time() - 3600, '/');
     session_destroy();
-    echo 'Vous avez bien été déconnecté';
-    echo '<a href="connexion.php"> Retour à la page connexion </a>';
 ?>
+
+<html>
+    <p> Vous avez bien été déconnecté </p>
+    </br>
+    <a href='connexion.php'> Retour à la page connexion </a>
+    </br>
+    <img src='logo_alabar.png'>
+</html>

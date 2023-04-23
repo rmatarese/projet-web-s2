@@ -1,0 +1,61 @@
+/* Style pour le texte "Vous avez bien été déconnecté" */
+p {
+  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #F2C94C; /* Jaune */
+  margin-top: 5rem;
+}
+
+/* Style pour le lien "Retour à la page connexion" */
+a {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #262735; /* Noir */
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+/* Style pour l'image du logo */
+img {
+  display: block;
+  margin: 5rem auto;
+  max-width: 300px;
+}
+
+/* Style pour le body de la page */
+body {
+  background-color: #262735;
+  font-family: Arial, sans-serif;
+}
+
+/* Style pour le titre de la page */
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  color: #F2C94C; /* Jaune */
+}
+
+/* Style pour les liens */
+a {
+  display: block;
+    margin-top: 1rem;
+    width:20%;
+    text-align: center;
+    margin-left: auto;
+    margin-right:auto;
+    color: #F2C94C;
+    text-decoration: none;
+    border-style:solid;
+    border-radius:5px;
+}
+
+/* Style pour les messages d'erreur */
+.error {
+  color: red;
+  font-weight: bold;
+}

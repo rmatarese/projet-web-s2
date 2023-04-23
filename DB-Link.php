@@ -5,6 +5,9 @@ $username ='root';
 $password ='root';
 $database = 'alabar';
 
-$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$conn=mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    echo "Erreur de connexion".mysqli_connect_errno();
+    die();
+}
 ?>

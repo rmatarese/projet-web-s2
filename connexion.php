@@ -6,7 +6,7 @@
 <html>
 <head>
   <title>Connexion</title>
-  <link rel="stylesheet" type="text/css" href="connexion.css">
+  <link rel="stylesheet" type="text/css" href="connexion_style.css">
 </head>
 <body>
 
@@ -28,12 +28,12 @@
 
 	/* Cas où l'utilisateur est déjà connecté*/
 	if (isset($_COOKIE['user_id'])) {
-		echo "Bonjour, vous êtes déjà connecté en tant que ".$_SESSION['username'].". ";
-		echo "Vous pouvez vous déconnecter ou revenir sur la page d'acceuil \n";
+		echo "<p> Bonjour, vous êtes déjà connecté en tant que ".$_SESSION['username'].". </p>";
+		echo "<p>Vous pouvez vous déconnecter ou revenir sur la page d'accueil \n</p>";
 		echo "<a href='deconnexion.php'>Déconnexion</a>";
-		echo "<a href=acceuil.php>";
+		echo "<a href=acceuil.php> Retour acceuil </a>";
 		exit();
-	  }
+	}
 	else {
 		?>
 	<form method="post">
@@ -59,39 +59,39 @@ if (isset($_POST['login'])) {
 	$password = $_POST['password'];
 
 	// Requête pour vérifier les identifiants
-	$query = "SELECT * FROM client WHERE Nom = :Nom AND password = :password";
-	$stmt = $conn->prepare($query);
-	$stmt->bindParam(':Nom', $username);
-	$stmt->bindParam(':password', $password);
-	$stmt->execute();
-	$user = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-	// Vérifier si les identifiants sont corrects
-	if (isset($user)) {
-	  // Stocker les informations de l'utilisateur en session
+	$requete="SELECT Id, password,perm FROM client WHERE Nom = '$username'"; 
+	$resultat =$conn->query($requete);
+	if ( $resultat == FALSE ){
+		echo "<p>Erreur d'exécution de la requete :".mysqli_error($connexion)."</p>" ;
+	die();
+	}
+		
+	while($row = mysqli_fetch_assoc($resultat)){
+		if ($row["password"] == $password){
+			// Stocker les informations de l'utilisateur en session
 
-	  $_SESSION['user_id'] = $user['Id'];
-	  $_SESSION['username'] = $user['Nom'];
-	  $_SESSION['user_type'] = $user['perm'];
+			$_SESSION["username"]=$_POST['username'];
+            $_SESSION["Id"]=$row["Id"];
+			$_SESSION["perm"]=$row["perm"];
+	  
+			// Créer le cookie
+			  setcookie('user_id', $_SESSION["Id"], time() + 24*3600*7, '/');
+	  
+		
+			// Rediriger vers la page appropriée
+			if ($_SESSION['perm'] == 'admin') {
+			  header("Location: page_admin.php");
+			} else {
+			  header("Location: page_client.php");
+			}
+			exit();
 
-	  // Créer le cookie
-  	  setcookie('user_id', $user['Id'], time() + 24*3600*7, '/');
-
-  
-	  // Rediriger vers la page appropriée
-	  if ($user['perm'] == 'admin') {
-		header("Location: page_admin.php");
-	  } else {
-		header("Location: page_client.php");
-		echo isset($_SESSION['username']);
+		}
+	 else {
+		// Afficher un message d'erreur si les identifiants sont incorrects
+		echo " <p> Mot de passe ou nom d'utilisateur incorrect </p>";
+		$error = "Nom d'utilisateur ou mot de passe incorrect";
 	  }
-	  exit();
-	
-
-	} else {
-	  // Afficher un message d'erreur si les identifiants sont incorrects
-	  echo "Mot de passe ou nom d'utilisateur incorrect";
-	  $error = "Nom d'utilisateur ou mot de passe incorrect";
 	}
 }
 ?>

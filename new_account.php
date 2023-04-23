@@ -64,7 +64,8 @@ if ($password != $confirm_password) {
     $query = "INSERT INTO client (Nom, password, Prenom, DateNaissance, email, perm) VALUES (:Nom, :password, :Prenom, :DateNaissance, :email, 'client')";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':Nom', $username);
-    $stmt->bindParam(':password', $password);
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $stmt->bindParam(':password', $hash);
     $stmt->bindParam(':Prenom',$prenom);
     $stmt->bindParam('DateNaissance',$date);
     $stmt->bindParam('email',$email);
@@ -82,7 +83,7 @@ if ($password != $confirm_password) {
 <html>
 <head>
   <title>Créer un compte</title>
-  <link rel="stylesheet" type="text/css" href="connexion.css">
+  <link rel="stylesheet" type="text/css" href="new_account_style.css">
 </head>
 <body>
 
@@ -120,7 +121,7 @@ if ($password != $confirm_password) {
     <input type="submit" name="register" value="Créer un compte">
   </form>
 
-  <p>Déjà un compte ? <a href="connexion.php">Connectez-vous</a>.</p>
+  <p>Déjà un compte ? <a href="connexion.php">Connectez-vous</a></p>
 
 </body>
 </html>
