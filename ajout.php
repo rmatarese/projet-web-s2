@@ -17,13 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("La connexion à la base de données a échoué: " . mysqli_connect_error());
     }
     // Récupérer les données du formulaire
-    $bar_id = $_POST['bar-id'];
     $bar_name = $_POST['bar-name'];
     $bar_city = $_POST['bar-city'];
     $bar_address = $_POST['bar-address'];
 
     // Créer une requête SQL pour insérer les données du formulaire dans la base de données
-    $sql = "INSERT INTO bars (IdBar, NomBar, AdresseBar, Villebar) VALUES ('$bar_id', '$bar_name','$bar_address','$bar_city')";
+    $sql = "INSERT INTO bars (NomBar, AdresseBar, Villebar) VALUES ('$bar_name','$bar_address','$bar_city')";
 
     // Exécuter la requête SQL
     if (mysqli_query($conn, $sql)) {

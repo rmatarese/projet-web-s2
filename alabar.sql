@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bar` (
-  `IdBar` int(11) NOT NULL,
+  `IdBar` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `NomBar` varchar(64) NOT NULL,
   `AdresseBar` varchar(64) NOT NULL,
   `VilleBar` varchar(64) NOT NULL
