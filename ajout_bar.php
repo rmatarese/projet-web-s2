@@ -9,8 +9,6 @@ if(!isset($_SESSION['username'])){
 <DOCTYPE html>
 <html>
 <form action="ajout.php" method="POST">
-  <label for="bar-id">ID du bar:</label>
-  <input type="text" id="bar-id" name="bar-id" required><br><br>
   
   <label for="bar-name">Nom du bar:</label>
   <input type="text" id="bar-name" name="bar-name" required><br><br>

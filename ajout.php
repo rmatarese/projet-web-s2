@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Se connecter à la base de données MySQL
     require("DB-Link.php");
 
-    $conn = mysqli_connect($host, $user, $password, $dbname);
+    $conn = mysqli_connect($servername, $username, $password, $database);
 
     // Vérifier la connexion
     if (!$conn) {
