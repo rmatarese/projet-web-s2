@@ -17,6 +17,14 @@
   <?php endif; ?>
 
   <?php
+	if(isset($_COOKIE['user_id'])){
+		echo "vous êtes déjà connecté";
+		echo "Souhaitez-vous vous déconnecter ?";
+		echo "<a href='deconnexion.php'> Déconnexion </a>";
+	}
+  ?>
+
+  <?php
 	require("DB-Link.php");
 ?>
 
@@ -56,25 +64,31 @@ if (isset($_POST['login'])) {
 	$password = $_POST['password'];
 
 	// Requête pour vérifier les identifiants
-	$query = "SELECT * FROM users WHERE username = :username AND password = :password";
+	$query = "SELECT * FROM client WHERE Nom = :Nom AND password = :password";
 	$stmt = $conn->prepare($query);
-	$stmt->bindParam(':username', $username);
+	$stmt->bindParam(':Nom', $username);
 	$stmt->bindParam(':password', $password);
 	$stmt->execute();
 	$user = $stmt->fetch(PDO::FETCH_ASSOC);
   
 	// Vérifier si les identifiants sont corrects
-	if ($user) {
+	if (isset($user)) {
 	  // Stocker les informations de l'utilisateur en session
-	  $_SESSION['user_id'] = $user['id'];
-	  $_SESSION['username'] = $user['username'];
-	  $_SESSION['user_type'] = $user['type'];
+	  $_SESSION['user_id'] = $user['Id'];
+	  $_SESSION['username'] = $user['Nom'];
+	  $_SESSION['user_type'] = $user['perm'];
+
+	  // Créer le cookie
+  	  setcookie('user_id', $user['Id'], time() + 24*3600*7, '/');
+
+	
   
 	  // Rediriger vers la page appropriée
-	  if ($user['type'] == 'admin') {
+	  if ($user['perm'] == 'admin') {
 		header("Location: page_admin.php");
 	  } else {
-		header("Location: page_client.php");
+		//header("Location: page_client.php");
+		echo isset($_SESSION['username']);
 	  }
 	  exit();
 	
