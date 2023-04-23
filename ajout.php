@@ -5,10 +5,7 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Se connecter à la base de données MySQL
-    $host = "localhost";
-    $user = "root";
-    $password = "root";
-    $dbname = "alabar";
+    require("DB-Link.php");
 
     $conn = mysqli_connect($host, $user, $password, $dbname);
 
@@ -22,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bar_address = $_POST['bar-address'];
 
     // Créer une requête SQL pour insérer les données du formulaire dans la base de données
-    $sql = "INSERT INTO bars (NomBar, AdresseBar, Villebar) VALUES ('$bar_name','$bar_address','$bar_city')";
+    $sql = "INSERT INTO bar (NomBar, AdresseBar, Villebar) VALUES ('$bar_name','$bar_address','$bar_city')";
 
     // Exécuter la requête SQL
     if (mysqli_query($conn, $sql)) {
