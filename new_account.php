@@ -63,10 +63,12 @@ if ($password != $confirm_password) {
   $retry=true;
 }
 
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
   // Enregistrer l'utilisateur dans la base de données
   if (empty($errors)) {
     // Requête pour ajouter l'utilisateur à la base de données
-    $requete = "INSERT INTO client(Nom, Prenom, DateNaissance, Email, password) VALUES('$username', '$prenom', '$date', '$mail', '$password')";
+    $requete = "INSERT INTO client(Nom, Prenom, DateNaissance, Email, password) VALUES('$username', '$prenom', '$date', '$mail', '$hash')";
     $conn->query($requete); //Executer la requete de suppression
     echo $conn->error;
     // Rediriger vers la page de connexion
