@@ -31,7 +31,10 @@ CREATE TABLE `bar` (
   `IdBar` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `NomBar` varchar(64) NOT NULL,
   `AdresseBar` varchar(64) NOT NULL,
-  `VilleBar` varchar(64) NOT NULL
+  `VilleBar` varchar(64) NOT NULL,
+  `Note` int(11) NOT NULL,
+  `Commentaires` varchar(64) NOT NULL	,
+  `Status`Boolean NOT NULL, 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
