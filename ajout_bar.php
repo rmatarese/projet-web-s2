@@ -18,7 +18,13 @@ if(!isset($_SESSION['username'])){
   
   <label for="bar-address">Adresse du bar:</label>
   <input type="text" id="bar-address" name="bar-address" required><br><br>
-  
+
+  <label for="Note">Note:</label>
+  <input type="number" id="Note" name="Note" required><br><br>
+
+  <label for="Commentaire">Commentaire:</label>
+  <input type="text" id="Commentaire" name="Commentaire"><br><br>
+
   <input type="submit" value="Envoyer">
 </form>
 </html>

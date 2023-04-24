@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 23, 2023 at 01:57 PM
+-- Generation Time: Apr 22, 2023 at 08:11 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -28,35 +28,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bar` (
-  `IdBar` int(11) NOT NULL,
+  `IdBar` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `NomBar` varchar(64) NOT NULL,
   `AdresseBar` varchar(64) NOT NULL,
   `VilleBar` varchar(64) NOT NULL,
   `Note` int(11) NOT NULL,
-  `Commentaires` varchar(180) NOT NULL
+  `Commentaires` varchar(64) NOT NULL	,
+  `Status`Boolean NOT NULL, 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bar`
 --
 
-INSERT INTO `bar` (`IdBar`, `NomBar`, `AdresseBar`, `VilleBar`, `Note`, `Commentaires`) VALUES
-(1, 'Le Zytho', '41 Bd Vauban', 'Lille', 0, ''),
-(2, 'Le Point de Départ', '48 Rue Solférino', 'Lille', 0, '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bar_temp`
---
-
-CREATE TABLE `bar_temp` (
-  `NomBar` varchar(64) NOT NULL,
-  `AdresseBar` varchar(64) NOT NULL,
-  `VilleBar` varchar(64) NOT NULL,
-  `Note` int(11) NOT NULL,
-  `Commentaires` varchar(180) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `bar` (`IdBar`, `NomBar`, `AdresseBar`, `VilleBar`) VALUES
+(1, 'Le Zytho', '41 Bd Vauban', 'Lille'),
+(2, 'Le Point de Départ', '48 Rue Solférino', 'Lille');
 
 -- --------------------------------------------------------
 
@@ -91,6 +78,12 @@ ALTER TABLE `bar`
   ADD PRIMARY KEY (`IdBar`);
 
 --
+-- Indexes for table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -99,6 +92,12 @@ ALTER TABLE `bar`
 --
 ALTER TABLE `bar`
   MODIFY `IdBar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `client`
+--
+ALTER TABLE `client`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
