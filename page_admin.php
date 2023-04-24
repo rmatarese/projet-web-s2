@@ -7,7 +7,7 @@
 
 	session_start();
     // si l'utilisateur n'est pas authentifié ou n'est pas admin
-	if(($_SESSION["authentifie"] == false) && $_SESSION["admin"] == false) {
+	if(!isset($_SESSION['username']) || $_SESSION['perm']!='admin'){
 		// redirection vers la page d'authentification TP5.php
 		header("Location:accueil.php");
 	}
@@ -21,7 +21,7 @@
 <html lang="fr">
 	<head>
 		<title>Page admin</title>
-        <link rel="stylesheet" type="text/css" href="connexion.css">
+        <link rel="stylesheet" type="text/css" href="connexion_style.css">
 		<meta charset="utf-8" />
 	</head>
 	<body>
