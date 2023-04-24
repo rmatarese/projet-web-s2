@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2023 at 05:17 PM
+-- Generation Time: Apr 24, 2023 at 11:07 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -67,7 +67,7 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`Id`, `Nom`, `Prenom`, `Email`, `DateNaissance`, `Password`, `perm`) VALUES
 (1, 'Broucqsault', 'Simon', 'simon.broucqsault@student.junia.com', '2004-07-09', '', 'client'),
-(2, 'Admin', 'Admin', 'admin@gmail.com', '2023-04-14', '$2y$10$BdVOodXPwA8pW4SSI/4ob.x7u0zyFd7GfqXgJEVBu/x7MTTOqiMTO', 'client'),
+(2, 'Admin', 'Admin', 'admin@gmail.com', '2023-04-14', '$2y$10$BdVOodXPwA8pW4SSI/4ob.x7u0zyFd7GfqXgJEVBu/x7MTTOqiMTO', 'admin'),
 (3, 'Client', 'Client', 'client@gmail.com', '1010-10-10', '$2y$10$WdlO1.BiSgGShwLYXXODKOFVz9eKt4RkagC2TMt9Md0G7khqZqTqW', 'client');
 
 --
