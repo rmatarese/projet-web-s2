@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2023 at 11:07 PM
+-- Generation Time: Apr 24, 2023 at 11:50 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -34,16 +34,17 @@ CREATE TABLE `bar` (
   `VilleBar` varchar(64) NOT NULL,
   `Note` int(11) NOT NULL,
   `Commentaires` varchar(64) NOT NULL,
-  `Status` tinyint(1) NOT NULL
+  `Status` enum('admin-only','public') NOT NULL DEFAULT 'admin-only',
+  `nb_note` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bar`
 --
 
-INSERT INTO `bar` (`IdBar`, `NomBar`, `AdresseBar`, `VilleBar`, `Note`, `Commentaires`, `Status`) VALUES
-(1, 'Le Zytho', '41 Bd Vauban', 'Lille', 0, '', 0),
-(2, 'Le Point de Départ', '48 Rue Solférino', 'Lille', 0, '', 0);
+INSERT INTO `bar` (`IdBar`, `NomBar`, `AdresseBar`, `VilleBar`, `Note`, `Commentaires`, `Status`, `nb_note`) VALUES
+(1, 'Le Zytho', '41 Bd Vauban', 'Lille', 0, '', '', 0),
+(2, 'Le Point de Départ', '48 Rue Solférino', 'Lille', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
