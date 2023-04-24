@@ -62,7 +62,7 @@ if (isset($_POST['login'])) {
 	$requete="SELECT Id, password,perm FROM client WHERE Nom = '$username'"; 
 	$resultat =$conn->query($requete);
 	if ( $resultat == FALSE ){
-		echo "<p>Erreur d'exécution de la requete :".mysqli_error($connexion)."</p>" ;
+		echo "<p>Erreur d'exécution de la requete :".mysqli_error($conn)."</p>" ;
 	die();
 	}
 		
