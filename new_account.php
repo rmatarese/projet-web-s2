@@ -23,8 +23,8 @@ if (isset($_POST['register'])) {
   $confirm_password = valider_donnees($_POST['confirm_password']);
   $prenom = valider_donnees($_POST['prenom']);
   $date = valider_donnees($_POST['date']);
-  $email = valider_donnees($_POST['email']);
-
+  $mail = valider_donnees($_POST['mail']);
+  
   // Valider les informations du formulaire
   $errors = array();
   $retry = false;
@@ -39,16 +39,21 @@ if (isset($_POST['register'])) {
 
   
   //vérification de l'unicité du nom d'utilisateurs
-  $query = "SELECT COUNT(*) FROM client WHERE Nom = :Nom";
-  $stmt = $conn->prepare($query);
-  $stmt->bindParam(':Nom', $username);
-  $stmt->execute();
-  $count = $stmt->fetchColumn();
+  $requete = "SELECT * FROM client";
+  $resultat=$conn->query($requete);
+  
+  while($row=mysqli_fetch_assoc($resultat)){
+    if($row['Nom']==$username) {
+      $errors[]="Ce nom est déjà utilisé";
+    }
+    if($row['Email']==$mail){
+      $errors[]="Ce mail est déjà utilisé";
+    }
+  }
+  
 
-if ($count > 0) {
-  // Le nom d'utilisateur existe déjà
-  $errors[] = "Le nom d'utilisateur est déjà pris";
-}
+  
+
 if (!preg_match("/[a-z]/", $password) || !preg_match("/[A-Z]/", $password) || !preg_match("/[0-9]/",$password)) {
     $errors[] = "Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre, et faire minimum 8 caractères";
     $retry=true;
@@ -61,18 +66,15 @@ if ($password != $confirm_password) {
   // Enregistrer l'utilisateur dans la base de données
   if (empty($errors)) {
     // Requête pour ajouter l'utilisateur à la base de données
-    $query = "INSERT INTO client (Nom, password, Prenom, DateNaissance, email, perm) VALUES (:Nom, :password, :Prenom, :DateNaissance, :email, 'client')";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':Nom', $username);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':Prenom',$prenom);
-    $stmt->bindParam('DateNaissance',$date);
-    $stmt->bindParam('email',$email);
-    $stmt->execute();
-
+    $requete = "INSERT INTO client(Nom, Prenom, DateNaissance, Email, password) VALUES('$username', '$prenom', '$date', '$mail', '$password')";
+    $conn->query($requete); //Executer la requete de suppression
+    echo $conn->error;
     // Rediriger vers la page de connexion
-    echo "Compte créé avec succès.";
+    echo '<body>';
+    echo "<link rel='stylesheet' type='text/css' href='new_account_style.css'>";
+    echo "<p> Compte créé avec succès. <p>";
     echo "<a href='connexion.php'> Connectez vous </a>";
+    echo "</body>";
     exit();
   }
 }
@@ -109,7 +111,7 @@ if ($password != $confirm_password) {
     <input type="date" name="date" required>
     <br>
     <label>E-mail (*)</label>
-    <input type="mail" name="email" required>
+    <input type="mail" name="mail" required>
     <br>
     <label>Mot de passe: (*)</label>
     <input type="password" name="password" required>
@@ -121,6 +123,8 @@ if ($password != $confirm_password) {
   </form>
 
   <p>Déjà un compte ? <a href="connexion.php">Connectez-vous</a></p>
-
+  
 </body>
 </html>
+
+

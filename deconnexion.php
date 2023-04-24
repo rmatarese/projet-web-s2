@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Déconnexion</title>
+  <title>Connexion</title>
   <link rel="stylesheet" type="text/css" href="deconnexion_style.css">
 </head>
 </html>
@@ -24,5 +24,5 @@
     </br>
     <a href='connexion.php'> Retour à la page connexion </a>
     </br>
-    <img src='images/logo_alabar.png'>
+    <img src='logo_alabar.png'>
 </html>

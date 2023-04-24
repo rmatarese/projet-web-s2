@@ -67,7 +67,7 @@ if (isset($_POST['login'])) {
 	}
 		
 	while($row = mysqli_fetch_assoc($resultat)){
-		if ($row["password"] == $password){
+		if (password_verify($password,$row["password"])){
 			// Stocker les informations de l'utilisateur en session
 
 			$_SESSION["username"]=$_POST['username'];
