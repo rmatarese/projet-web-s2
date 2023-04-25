@@ -61,7 +61,7 @@ if(isset($_POST['note'])){
         <label> Bar : </label></br>
         <?php
         echo "<select name='bar' id='bar'>";
-        $requete="SELECT IdBar,NomBar FROM bar";
+        $requete="SELECT IdBar,NomBar FROM bar WHERE Status='public'";
         $resultat =$conn->query($requete);
         while($row = mysqli_fetch_assoc($resultat)){
             echo "<option value='".$row['NomBar']."'>".$row['NomBar']."</option>";

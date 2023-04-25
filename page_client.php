@@ -33,6 +33,7 @@ if (mysqli_num_rows($resultat) > 0) {
         echo "<tr><td>".$ligne["NomBar"]."</td><td>".$ligne["AdresseBar"]."</td><td>".$ligne["VilleBar"]."</td><td>".round($ligne["Note"],2)."</td></tr>";
     }
     echo "</tbody></table>";
+    echo'<a href="noter.php"> Noter un bar déjà existant </a>';
 } else {
     echo "Aucune donnée trouvée.";
 }
@@ -40,7 +41,6 @@ if (mysqli_num_rows($resultat) > 0) {
 // Fermer la connexion à la base de données
 mysqli_close($conn);
 ?>
-    <a href="noter.php"> Noter un bar déjà existant </a>
     <a href="ajout_bar.php">Ajouter un bar</a>
     <a href="deconnexion.php">Se déconnecter</a>
 </body>
