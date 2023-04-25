@@ -1,6 +1,12 @@
 <?php
 session_start();
-
+?>
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="ajout_style.css">
+</head>
+</html>
+<?php
 // Vérifier si les données du formulaire ont été soumises
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -18,10 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bar_city = $_POST['bar-city'];
     $bar_address = $_POST['bar-address'];
     $bar_note = $_POST['Note'];
-    $bar_comment = $_POST['Commentaire'];
 
     // Créer une requête SQL pour insérer les données du formulaire dans la base de données
-    $sql = "INSERT INTO bar_temp (NomBar, AdresseBar, Villebar,Note, Commentaires) VALUES ('$bar_name','$bar_address','$bar_city','$bar_note','$bar_comment')";
+    $sql = "INSERT INTO bar (NomBar, AdresseBar, Villebar,Note) VALUES ('$bar_name','$bar_address','$bar_city','$bar_note')";
 
     // Exécuter la requête SQL
     if (mysqli_query($conn, $sql)) {
@@ -40,4 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <DOCTYPE html>
 <html>
 <a href="page_client.php">Retourner à la page client</a>
+
+
 </html>

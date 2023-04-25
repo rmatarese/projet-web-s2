@@ -1,0 +1,88 @@
+/* CSS pour le formulaire de notation */
+
+body {
+    background-color: #262735;
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    font-size: 2em;
+    color: #F2C94C;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    color: #262735;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  label[for^="note"] {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 50%;
+    background-color: #F2C94C;
+    color: #262735;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  input[type="radio"]:checked + label {
+    background-color: #262735;
+    color: #F2C94C;
+  }
+  
+  input[type="submit"] {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #F2C94C;
+    color: #262735;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #262735;
+    color: #F2C94C;
+  }
+
+  a {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #F2C94C;
+    color: #262735;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+  

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2023 at 11:50 PM
+-- Generation Time: Apr 25, 2023 at 03:58 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -32,19 +32,21 @@ CREATE TABLE `bar` (
   `NomBar` varchar(64) NOT NULL,
   `AdresseBar` varchar(64) NOT NULL,
   `VilleBar` varchar(64) NOT NULL,
-  `Note` int(11) NOT NULL,
-  `Commentaires` varchar(64) NOT NULL,
+  `Note` decimal(65,0) NOT NULL,
   `Status` enum('admin-only','public') NOT NULL DEFAULT 'admin-only',
-  `nb_note` int(11) NOT NULL
+  `nb_note` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bar`
 --
 
-INSERT INTO `bar` (`IdBar`, `NomBar`, `AdresseBar`, `VilleBar`, `Note`, `Commentaires`, `Status`, `nb_note`) VALUES
-(1, 'Le Zytho', '41 Bd Vauban', 'Lille', 0, '', '', 0),
-(2, 'Le Point de Départ', '48 Rue Solférino', 'Lille', 0, '', '', 0);
+INSERT INTO `bar` (`IdBar`, `NomBar`, `AdresseBar`, `VilleBar`, `Note`, `Status`, `nb_note`) VALUES
+(1, 'Le Zytho', '41 Bd Vauban', 'Lille', '1', 'admin-only', 385),
+(2, 'Le Point de Départ', '48 Rue Solférino', 'Lille', '6', 'admin-only', 2),
+(3, 'Espit Chupitos', '6 Rue du Faisan', 'Lille', '6', 'admin-only', 3),
+(4, 'Test', 'Muche', 'Truc', '5', 'admin-only', 2),
+(5, 'eee', 'eee', 'eeee', '3', 'admin-only', 3);
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,8 @@ CREATE TABLE `client` (
 INSERT INTO `client` (`Id`, `Nom`, `Prenom`, `Email`, `DateNaissance`, `Password`, `perm`) VALUES
 (1, 'Broucqsault', 'Simon', 'simon.broucqsault@student.junia.com', '2004-07-09', '', 'client'),
 (2, 'Admin', 'Admin', 'admin@gmail.com', '2023-04-14', '$2y$10$BdVOodXPwA8pW4SSI/4ob.x7u0zyFd7GfqXgJEVBu/x7MTTOqiMTO', 'admin'),
-(3, 'Client', 'Client', 'client@gmail.com', '1010-10-10', '$2y$10$WdlO1.BiSgGShwLYXXODKOFVz9eKt4RkagC2TMt9Md0G7khqZqTqW', 'client');
+(3, 'Client', 'Client', 'client@gmail.com', '1010-10-10', '$2y$10$WdlO1.BiSgGShwLYXXODKOFVz9eKt4RkagC2TMt9Md0G7khqZqTqW', 'client'),
+(4, 'zofeo', 'znfz', 'ifzno@grejngr', '1111-11-11', '$2y$10$vjfx9EhA13s2p/1v4vxAJuA6MzzXuPV1BDZmOIXknyOd97IWIZXkC', 'client');
 
 --
 -- Indexes for dumped tables
@@ -95,13 +98,13 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `IdBar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IdBar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

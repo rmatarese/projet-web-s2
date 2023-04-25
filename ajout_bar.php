@@ -8,6 +8,12 @@ if(!isset($_SESSION['username'])){
 ?>
 <DOCTYPE html>
 <html>
+  <head>
+    <title> Ajout </title>
+    <link rel="stylesheet" type="text/css" href="ajout_style.css">
+</head>
+<body>
+  <h1> Ajout d'un Bar </h1>
 <form action="ajout.php" method="POST">
   
   <label for="bar-name">Nom du bar:</label>
@@ -27,4 +33,6 @@ if(!isset($_SESSION['username'])){
 
   <input type="submit" value="Envoyer">
 </form>
+<a href="page_client.php"> Retour à la liste des bars </a>
+</body>
 </html>
