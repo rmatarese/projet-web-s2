@@ -19,7 +19,7 @@ if(!isset($_SESSION['username'])){
 
 <?php
 // Requête SQL pour récupérer toutes les données de la table "utilisateurs"
-$sql = "SELECT * FROM bar";
+$sql = "SELECT * FROM bar WHERE Status='public'";
 $resultat = mysqli_query($conn, $sql);
 
 // Vérifier si des données ont été trouvées
