@@ -28,9 +28,6 @@ if(!isset($_SESSION['username'])){
   <label for="Note">Note:</label>
   <input type="number" id="Note" name="Note" required><br><br>
 
-  <label for="Commentaire">Commentaire:</label>
-  <input type="text" id="Commentaire" name="Commentaire"><br><br>
-
   <input type="submit" value="Envoyer">
 </form>
 <a href="page_client.php"> Retour à la liste des bars </a>
