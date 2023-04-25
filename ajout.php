@@ -20,10 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("La connexion à la base de données a échoué: " . mysqli_connect_error());
     }
     // Récupérer les données du formulaire
-    $bar_name = $_POST['bar-name'];
-    $bar_city = $_POST['bar-city'];
-    $bar_address = $_POST['bar-address'];
-    $bar_note = $_POST['Note'];
+    $bar_name = valider_donnees($_POST['bar-name']);
+    $bar_city = valider_donnees($_POST['bar-city']);
+    $bar_address = valider_donnees($_POST['bar-address']);
+    $bar_note = valider_donnees($_POST['Note']);    
     $sql="SELECT Villebar,NomBar FROM bar WHERE NomBar='$bar_name'";
     $resultat =$conn->query($sql);
     $existant=FALSE;

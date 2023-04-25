@@ -20,6 +20,7 @@ if(isset($_POST['note'])){
         $id_bar = $row['IdBar'];
     }
 
+
     // Vérifier si l'utilisateur a déjà voté pour ce bar en utilisant les cookies
     $votes = array();
     if(isset($_COOKIE['votes'])){
@@ -44,7 +45,7 @@ if(isset($_POST['note'])){
     // Stocker les votes de l'utilisateur dans un cookie
     setcookie('votes', json_encode($votes), time()+60*60*24*30);
 
-    header("Location: page_client.php");
+    //header("Location: page_client.php");
 }
 
 ?>

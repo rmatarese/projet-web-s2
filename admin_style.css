@@ -1,6 +1,7 @@
 /* CSS pour le formulaire de connexion */
 body {
-    background-color: #262735;
+    background-color: #262735
+    ;
     font-family: Arial, sans-serif;
   }
   
@@ -26,9 +27,40 @@ body {
     margin-bottom: 0.5rem;
     color: #262735;
   }
-  
-  input[type="text"], input[type="password"], input[type='date'], input[type="mail"] {
+ 
+  input[type="radio"] {
+    display: none;
+  }
+
+  label[for^="valider"], label[for^="refuser"] {
+    display: inline-block;
     width: 100%;
+    height: 100%;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+label[for^="valider"] {
+    background-color: green;
+    color: black;
+    
+  }
+label[for^="refuser"] {
+    background-color: red;
+    color: black;
+    
+  }
+  input[type="radio"]:checked + label {
+    border-color: #262735;
+    border-style: solid;
+  }
+  input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="select"] {
+    width: 90%;
     padding: 0.5rem;
     margin-bottom: 1rem;
     border-radius: 3px;
@@ -43,10 +75,27 @@ body {
     border-radius: 3px;
     cursor: pointer;
   }
-  input[type="submit"]:hover {
-    background-color: #262735;
-    color: #F2C94C;
+
+  select {
+    width: 30%;
+    padding: 5px;
+    border: 1px solid #262735;
+    border-radius: 5px;
+    color: #262735;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
+  
+  /* Style pour le survol de la souris */
+  select:hover {
+    color: #262735;
+    border-color: #262735;
+  }
+  
+  
+  
+  
   a {
     display: block;
     margin-top: 1rem;
@@ -58,12 +107,7 @@ body {
     text-decoration: none;
     border-style:solid;
     border-radius:5px;
-  }
-
-  a:hover{
-    background-color: #F2C94C;
-    color:#262735;
-    border-color:#F2C94C;
+    
   }
   
   .error {

@@ -43,5 +43,10 @@ mysqli_close($conn);
 ?>
     <a href="ajout_bar.php">Ajouter un bar</a>
     <a href="deconnexion.php">Se déconnecter</a>
+<?php
+    if($_SESSION['perm']=='admin'){
+        echo '<a href="page_admin.php">Page admin</a>';
+    }
+?>
 </body>
 </html>
