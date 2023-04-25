@@ -3,8 +3,12 @@
 <!-------------------------------------------------------------------------------------------------------------------------->
 
 
-<?php 
+<?php
+	// on démarre la session
 	session_start();
+
+	// connexion à la basse de donnée
+	require("DB-Link.php");
 
     // si l'utilisateur n'est pas authentifié ou n'est pas admin
 	if(!isset($_SESSION['username']) || $_SESSION['perm']!='admin'){
@@ -34,30 +38,26 @@
 <!-------------------------------------------------------------------------------------------------------------------------->
 
 
-		<?php
-			try{
-			    require("DB-Link.php");
-			    $reqPrep="SELECT * FROM bar";
-			    $req = $conn->prepare($reqPrep);
-				$req->execute();
-			}
-			catch(Exception $e){
-				die("Erreur : " . $e->getMessage());
-			}		
-		?>
-
 		<form action="" method="post">
 			<fieldset>
 				<legend>Modification du tableau "bar"</legend>
 
-                <!-- on va choisir le bar que l'on veut modifier en prenant son nom-->
 				<label>Nom du bar :</label>
 				<select name="bar">
 
-				<?php					
-				   	while($ligne=$req->fetch()){
-				    	echo "<option value=$ligne[IdBar]>$ligne[NomBar]</option>";
-				    }
+				<?php
+					// on va choisir le bar que l'on veut modifier en prenant son nom
+				   	$sql="SELECT IdBar,NomBar FROM bar WHERE Status='public'";
+					$resultat = mysqli_query($conn, $sql);
+
+					if (mysqli_num_rows($resultat) > 0) {
+						while($ligne = mysqli_fetch_assoc($resultat)) {
+							echo "<option value=$ligne[IdBar]>$ligne[NomBar]</option>";
+						}
+					}
+					else {
+						echo "Aucune donnée trouvée.";
+					} 
 			    ?>
 
 				</select>
@@ -69,9 +69,15 @@
                 <br><br>
 				<label>Ville :</label>
 				<input type="text" name="ville" required>
+				<br><br>
+				<label>Note:</label>
+  				<input type="number" name="note" required>
+				<br><br>
+				<label>Commentaire:</label>
+				<input type="text" name="commentaire">
+				<br><br>
 
 				<!-- on termine la modif -->
-				<br><br>
 				<input type="submit" name="Modifier le bar"/>
 			</fieldset>
 		</form>
@@ -85,34 +91,27 @@
 		<?php
             // si on appuie sur le boutton "Modifier le bar"...
         	if(isset($_POST['Modifier le bar'])){ 
-			try{
-			    require("DB-Link.php");
 
-				//récup du formulaire la nouvelle adresse et de la nouvelle ville du bar
-				$adresse=$_POST['adresse'];
-                $ville=$_POST['ville'];
-
-				//récup du formulaire la ref du bar à modifier
-				$ref=$_POST['bar'];
+				//récup du formulaire les nouvelles info du bar
+				$adresse = valider_donnees($_POST['adresse']);
+                $ville = valider_donnees($_POST['ville']);
+				$note = valider_donnees($_POST['note']);
+				$commentaire = valider_donnees($_POST['commentaire']);
 				
                 //requete pour modifier l'adresse et la ville dans la BD ( je suis pas sûr pour les AND)
-				$reqSQL="UPDATE bar SET AdresseBar = :adresse AND VilleBar = :ville WHERE NomBar = :bar;";
+				$reqSQL="UPDATE bar SET AdresseBar = :adresse, VilleBar = :ville, Note = :note, Commentaire = :commentaire WHERE NomBar = :bar;";
 
-				//préparer et exécuter la requête
-				$resultat = $conn->prepare($reqSQL);
-				$resultat->execute(array(
-					':adresse' => $adresse,
-                    ':ville' => $ville,
-					':bar' => $ref));
-				echo "<p>Bar modifié</p>" ;
-
-				//Fermer la connexion
-                $conn = null;
-				}                
-				catch(Exception $e){
-					die("Erreur : " . $e->getMessage());
+				// Exécuter la requête SQL
+				if (mysqli_query($conn, $reqSQL)) {
+					echo "Les informations du bar ont été enregistrées avec succès. la page devrait apparaître sous peu.";
 				}
-			}				
+				else {
+					echo "Erreur: " . $reqSQL . "<br>" . mysqli_error($conn);
+				}
+			
+				// Fermer la connexion à la base de données
+				mysqli_close($conn);
+				} 			
 		?>
         <br><br>
 
