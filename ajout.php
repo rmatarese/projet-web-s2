@@ -19,12 +19,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$conn) {
         die("La connexion à la base de données a échoué: " . mysqli_connect_error());
     }
+    
     // Récupérer les données du formulaire
-    $bar_name = valider_donnees($_POST['bar-name']);
-    $bar_city = valider_donnees($_POST['bar-city']); //on valide les données pour éviter les attaques
-    $bar_address = valider_donnees($_POST['bar-address']);
-    $bar_note = valider_donnees($_POST['Note']);    
+    $bar_name = valider_donnees($_POST["bar-name"]);
+    $bar_city = valider_donnees($_POST["bar-city"]); //on valide les données pour éviter les attaques
+    $bar_address = valider_donnees($_POST["bar-address"]);
+    $bar_note = valider_donnees($_POST["Note"]);    
     $sql="SELECT Villebar,NomBar FROM bar WHERE NomBar='$bar_name'";
+    if (preg_match("`([-_.,;:\|']+)`", $bar_name) || preg_match('`([-_.,;:\|]+)`', $bar_city) || preg_match('`([-_.,;:\|]+)`', $bar_address) || preg_match('`([-_.,;:\|]+)`', $bar_note)) {
+        echo "<h1> Pas de ponctuation ni de caractères spéciaux</h1>";
+    }
+    else{
     $resultat =$conn->query($sql);
     $existant=FALSE;
     while($row = mysqli_fetch_assoc($resultat)){ //on vérifie que le bar n'existe pas déjà, en utilisant un booléen comme flag
@@ -46,14 +51,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Fermer la connexion à la base de données
     mysqli_close($conn);
-
+    }
 } else {
     header("Location: ajout_bar.php");
+
 }
 ?>
 <DOCTYPE html>
 <html>
-<a href="page_client.php">Retourner à la page client</a>
-
-
+<body>
+    <a href='ajout_bar.php'>Retourner à la page d'ajout</a>";
+    <a href="page_client.php">Retourner à la page client</a>
+</body>
 </html>
