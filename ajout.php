@@ -21,13 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Récupérer les données du formulaire
     $bar_name = valider_donnees($_POST['bar-name']);
-    $bar_city = valider_donnees($_POST['bar-city']);
+    $bar_city = valider_donnees($_POST['bar-city']); //on valide les données pour éviter les attaques
     $bar_address = valider_donnees($_POST['bar-address']);
     $bar_note = valider_donnees($_POST['Note']);    
     $sql="SELECT Villebar,NomBar FROM bar WHERE NomBar='$bar_name'";
     $resultat =$conn->query($sql);
     $existant=FALSE;
-    while($row = mysqli_fetch_assoc($resultat)){
+    while($row = mysqli_fetch_assoc($resultat)){ //on vérifie que le bar n'existe pas déjà, en utilisant un booléen comme flag
         if($row['Villebar']==$bar_city){
             echo "<h1>Le bar existe déjà</h1>";
             $existant=TRUE;

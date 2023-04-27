@@ -20,21 +20,18 @@ if (isset($_POST['register'])) {
   // Récupérer les informations du formulaire
   $username = valider_donnees($_POST['username']);
   $password = valider_donnees($_POST['password']);
-  $confirm_password = valider_donnees($_POST['confirm_password']);
+  $confirm_password = valider_donnees($_POST['confirm_password']); //on valide les données vers la page appropriée
   $prenom = valider_donnees($_POST['prenom']);
   $date = valider_donnees($_POST['date']);
   $mail = valider_donnees($_POST['mail']);
   
   // Valider les informations du formulaire
   $errors = array();
-  $retry = false;
-  if (!preg_match('/^[a-zA-Z0-9]{4,}$/', $username)) {
+  if (!preg_match('/^[a-zA-Z0-9]{4,}$/', $username)) { 
     $errors[] = "Le nom d'utilisateur fait au moins 4 caractères et ne peut contenir que des caractères alphanumériques";
-    $retry=true;
   }
   if (!preg_match('/^[a-zA-Z0-9]{4,}$/', $prenom)) {
     $errors[] = "Le prénom fait au moins 4 caractères et ne peut contenir que des caractères alphanumériques";
-    $retry=true;
   }
 
   

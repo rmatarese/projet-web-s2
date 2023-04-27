@@ -15,8 +15,8 @@
     $stmt = $conn->prepare($query);
     $stmt->execute();
     session_start();
-    setcookie('user_id', '', time() - 3600, '/');
-    session_destroy();
+    setcookie('user_id', '', time() - 3600, '/'); //on supprime le cookie 'user_id' qui marque la connexion
+    session_destroy(); //et on détruit la session actuelle
 ?>
 
 <html>

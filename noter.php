@@ -7,11 +7,11 @@ if(!isset($_SESSION['username'])){
     header("Location: accueil.php");
 }
 
-// Vérifier si l'utilisateur a déjà voté pour ce bar
+
 if(isset($_POST['note'])){
     $note_set = $_POST['note'];
     $bar = $_POST['bar'];
-    $requete = "SELECT Note, IdBar, nb_note FROM bar WHERE NomBar = '$bar'";
+    $requete = "SELECT Note, IdBar, nb_note FROM bar WHERE NomBar = '$bar'"; 
     $resultat = $conn->query($requete);
     if ($resultat->num_rows > 0) {
         $row = $resultat->fetch_assoc();
@@ -22,12 +22,12 @@ if(isset($_POST['note'])){
 
 
     // Vérifier si l'utilisateur a déjà voté pour ce bar en utilisant les cookies
-    $votes = array();
-    if(isset($_COOKIE['votes'])){
-        $votes = json_decode($_COOKIE['votes'], true);
+    $votes = array(); // tableau de votes
+    if(isset($_COOKIE['votes'])){ // si l'utilisateur a déjà voté pour un bar
+        $votes = json_decode($_COOKIE['votes'], true); // récupérer les votes de l'utilisateur
     }
-    if(array_key_exists($id_bar, $votes)){
-        // Utilisateur a déjà voté pour ce bar, mettre à jour son vote
+    if(array_key_exists($id_bar, $votes)){ 
+        //L'utilisateur a déjà voté pour ce bar, on modifie son vote
         $note_sum = $note*$nb_note - $votes[$id_bar]['note'] + $note_set;
         $note = $note_sum / $nb_note;
         $requete = "UPDATE bar SET Note='$note' WHERE NomBar='$bar'";
@@ -42,10 +42,10 @@ if(isset($_POST['note'])){
         $votes[$id_bar] = array('note' => $note_set, 'nb_note' => $nb_note);
     }
 
-    // Stocker les votes de l'utilisateur dans un cookie
-    setcookie('votes', json_encode($votes), time()+60*60*24*30);
+    // On enregistre les votes dans les cookies
+    setcookie('votes', json_encode($votes), time()+60*60*24*30); //le cookie dure 1 mois. Après ce délai, on considère que le vote est a nouveau possible
 
-    //header("Location: page_client.php");
+    header("Location: page_client.php");
 }
 
 ?>
@@ -65,7 +65,7 @@ if(isset($_POST['note'])){
         $requete="SELECT IdBar,NomBar FROM bar WHERE Status='public'";
         $resultat =$conn->query($requete);
         while($row = mysqli_fetch_assoc($resultat)){
-            echo "<option value='".$row['NomBar']."'>".$row['NomBar']."</option>";
+            echo "<option value='".$row['NomBar']."'>".$row['NomBar']."</option>"; //on affiche la liste des bars dans un menu déroulant
         }
         echo "</select>";
         ?>
@@ -86,6 +86,6 @@ if(isset($_POST['note'])){
         </br>
         <input type="submit" value="Envoyer">
     </form>
-    <a href="page_client.php"> Retour à la page </a>
+    <a href="page_client.php"> Retour à la page principale</a>
   </body>
 </html>

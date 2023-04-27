@@ -10,7 +10,7 @@ if (!$conn) {
     echo "Erreur de connexion".mysqli_connect_errno();
     die();
 }
-
+//on définie la fonction valider données pour éviter les attaques dans ce fichier car elle sera utilisée souvent
 function valider_donnees($donnees){
     $donnees=trim($donnees);
     $donnees=stripslashes($donnees);
