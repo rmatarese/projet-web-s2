@@ -47,10 +47,10 @@
 				<select name="bar" id="bar">
 
 				<?php
-					// on va choisir le bar que l'on veut modifier en prenant son nom
+					// Requete pour récupérer tout les bars publics
 				   	$sql="SELECT IdBar,NomBar FROM bar WHERE Status='public'";
 					$resultat = $conn->query($sql);
-
+					// on affiche les bars dans un menu déroulant
 					if (mysqli_num_rows($resultat) > 0) {
 						while($row = mysqli_fetch_assoc($resultat)){
 							echo "<option value='".$row['NomBar']."'>".$row['NomBar']."</option>";
@@ -63,7 +63,7 @@
 
 				</select>
 
-				<!-- on modifie l'adresse et la ville du bar -->
+				<!-- form contenant les points à modifier -->
 				<br><br>
 				<label>Adresse :</label>
 				<input type="text" name="adresse" required>
@@ -75,7 +75,6 @@
   				<input type="number" name="note" required>
 				<br><br>
 
-				<!-- on termine la modif -->
 				<input type="submit" name="Modifier le bar"/>
 			</fieldset>
 		</form>
@@ -92,14 +91,14 @@
 
 				//récup du formulaire les nouvelles info du bar
 				$adresse = valider_donnees($_POST['adresse']);
-                $ville = valider_donnees($_POST['ville']);
+                $ville = valider_donnees($_POST['ville']); //on récupère les données du formulaire en les validant pour éviter les attaques
 				$note = valider_donnees($_POST['note']);
-				if($note>10) $note=10;
+				if($note>10) $note=10; //on empêche la note d'être supérieure à la note maximale
 				$bar=$_POST['bar'];
                 //requete pour modifier l'adresse et la ville dans la BD ( je suis pas sûr pour les AND)
-				$reqSQL="UPDATE bar SET AdresseBar='$adresse', VilleBar='$ville', Note='$note' WHERE NomBar='$bar'";
+				$reqSQL="UPDATE bar SET AdresseBar='$adresse', VilleBar='$ville', Note='$note' WHERE NomBar='$bar'"; //on modifie les données du bar sélectionné
 				$resultat=$conn->query($reqSQL);
-				// Exécuter la requête SQL
+				
 				if ($resultat!=FALSE) {
 					echo "Les informations du bar ont été enregistrées avec succès. la page devrait apparaître sous peu.";
 				}
@@ -107,7 +106,6 @@
 					echo "Erreur: " . $reqSQL . "<br>" . mysqli_error($conn);
 				}
 			
-				// Fermer la connexion à la base de données
 				} 			
 		?>
         <br><br>
@@ -119,19 +117,19 @@
 
 	<form action="" method="post">
 			<fieldset>
-				<legend>Modification du tableau "bar"</legend>
+				<legend>Validation de bar proposés</legend>
 
 				<label>Nom du bar :</label>
 				<select name="bar" id="bar">
 
 				<?php
 					// on va choisir le bar que l'on veut modifier en prenant son nom
-				   	$sql="SELECT IdBar,NomBar FROM bar WHERE Status='admin-only'";
+				   	$sql="SELECT IdBar,NomBar FROM bar WHERE Status='admin-only'"; //on récupère les bars pas encore validés
 					$resultat = $conn->query($sql);
 
 					if (mysqli_num_rows($resultat) > 0) {
 						while($row = mysqli_fetch_assoc($resultat)){
-							echo "<option value='".$row['NomBar']."'>".$row['NomBar']."</option>";
+							echo "<option value='".$row['NomBar']."'>".$row['NomBar']."</option>"; //on les affiche dans un menu déroulant
 						}
 					}
 					else {
@@ -144,7 +142,7 @@
 				<!-- on modifie l'adresse et la ville du bar -->
 				<br><br>
 				<input type="radio" id="valider" name="validation" value="0"><label for="valider"> Valider </label>
-        		<br>
+        		<br> <!-- on utilise des boutons radios pour qu'un seul puisse être sélectionné -->
 				<input type="radio" id="refuser" name="validation" value="1"><label for="refuser"> Refuser </label>
 				<br>
 				<!-- on termine la modif -->
@@ -167,10 +165,10 @@
 				$validation = $_POST['validation'];
 				$bar=$_POST['bar'];
 				if($validation==0){
-					$reqSQL="UPDATE bar SET Status='public' WHERE NomBar='$bar'";
+					$reqSQL="UPDATE bar SET Status='public' WHERE NomBar='$bar'"; //si le bar a été validé, on change son statut en public
 				}
 				else{
-					$reqSQL="DELETE FROM bar WHERE NomBar='$bar'";
+					$reqSQL="DELETE FROM bar WHERE NomBar='$bar'"; //sinon on le supprime de la base de données
 				}
 				$resultat=$conn->query($reqSQL);
 				}
@@ -185,7 +183,7 @@
 
         <?php 
 			try{
-			    $requete="SELECT * FROM client";
+			    $requete="SELECT * FROM client"; //on récupère tous les clients inscrits
 			    $resultat=$conn->query($requete);
 			}
 			catch(Exception $e){
@@ -203,12 +201,12 @@
 				    <?php					
 					
 					while($row = mysqli_fetch_assoc($resultat)){
-						echo "<option value='".$row['Nom']."'>".$row['Nom']."</option>";
+						echo "<option value='".$row['Nom']."'>".$row['Nom']."</option>"; //on affiche les clients dans une liste déroulante
 					}
 				    ?>
 				</select>
 
-				<!-- on modifie le nom, le prénom, l'email et la date de naissance du client -->
+				<!-- form pour modifier le prénom, l'email et la date de naissance du client -->
 				<br><br>
 				<label>Prénom :</label>
 				<input type="text" name="prenom" required>
@@ -234,7 +232,6 @@
 		<?php
 
         if(isset($_POST['Modifier_le_client'])){ 
-			echo"coucou";
 
             //récup du formulaire les nouvelles valeurs du client
             $prenom=$_POST['prenom'];
@@ -245,7 +242,7 @@
             //récup du formulaire la ref du bar à modifier
             $ref=$_POST['Modifier_le_client'];
 			echo '</br>';
-            // requete pour modifier les valeurs dans la BD ( à vérif )
+            // requete pour modifier les valeurs dans la BD 
             $reqSQL="UPDATE client SET Prenom = '$prenom', Email = '$email', DateNaissance = '$dateNaissance' WHERE Nom = '$nom'";
 			echo '</br>';
             //exécuter la requête
