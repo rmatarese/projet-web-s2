@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 25, 2023 at 03:58 AM
+-- Generation Time: Apr 27, 2023 at 03:11 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -42,11 +42,19 @@ CREATE TABLE `bar` (
 --
 
 INSERT INTO `bar` (`IdBar`, `NomBar`, `AdresseBar`, `VilleBar`, `Note`, `Status`, `nb_note`) VALUES
-(1, 'Le Zytho', '41 Bd Vauban', 'Lille', '1', 'admin-only', 385),
-(2, 'Le Point de Départ', '48 Rue Solférino', 'Lille', '6', 'admin-only', 2),
-(3, 'Espit Chupitos', '6 Rue du Faisan', 'Lille', '6', 'admin-only', 3),
-(4, 'Test', 'Muche', 'Truc', '5', 'admin-only', 2),
-(5, 'eee', 'eee', 'eeee', '3', 'admin-only', 3);
+(6, 'Le Point De Départ', '48 rue Solférino', 'Lille', '8', 'public', 1),
+(7, 'Le Spotlight', '100 Rue Léon Gambetta', 'Lille', '9', 'public', 1),
+(8, 'KaraFun Lille', '8 rue Ratisbonne', 'Lille', '7', 'public', 1),
+(9, 'La pépite', '12 Pl Sébastopol', 'Lille', '10', 'public', 1),
+(10, 'La Canopée', '288 Rue Solférino', 'Lille', '5', 'public', 1),
+(11, 'Le Sling', '32 rue Jean Jaurès', 'Lille', '7', 'public', 1),
+(12, 'Le Bouquet', '182 BD Victor Hugo', 'Lille', '8', 'public', 1),
+(13, 'RIDDIM', '117 Rue des Postes', 'Lille', '10', 'public', 1),
+(14, 'Les Sarrazins', '52 rue des Sarrazins', 'Lille', '4', 'public', 1),
+(15, 'Le Gallia', '138 Rue des Marquillies', 'Lille', '6', 'public', 1),
+(16, 'Rush Bar', '32 Rue Saint Sébastien', 'Paris', '8', 'public', 1),
+(17, 'Little Red Door', '60 Rue Charlot', 'Paris', '7', 'public', 1),
+(18, 'Candelaria', '52 Rue de Saintonge', 'Paris', '2', 'public', 1);
 
 -- --------------------------------------------------------
 
@@ -69,10 +77,12 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`Id`, `Nom`, `Prenom`, `Email`, `DateNaissance`, `Password`, `perm`) VALUES
-(1, 'Broucqsault', 'Simon', 'simon.broucqsault@student.junia.com', '2004-07-09', '', 'client'),
 (2, 'Admin', 'Admin', 'admin@gmail.com', '2023-04-14', '$2y$10$BdVOodXPwA8pW4SSI/4ob.x7u0zyFd7GfqXgJEVBu/x7MTTOqiMTO', 'admin'),
 (3, 'Client', 'Client', 'client@gmail.com', '1010-10-10', '$2y$10$WdlO1.BiSgGShwLYXXODKOFVz9eKt4RkagC2TMt9Md0G7khqZqTqW', 'client'),
-(4, 'zofeo', 'znfz', 'ifzno@grejngr', '1111-11-11', '$2y$10$vjfx9EhA13s2p/1v4vxAJuA6MzzXuPV1BDZmOIXknyOd97IWIZXkC', 'client');
+(8, 'Sash', 'Sasha', 'Sasha.le-roux-zielinski@student.junia.com', '2828-02-28', '$2y$10$qOWbhF2v1vROKhEDMybhFOcC5x1WoxgoAjsH/HDbY285FI0uaoYZ6', 'admin'),
+(9, 'Robin', 'Robin', 'robin.matarese@student.junia.com', '2723-05-25', '$2y$10$t9navSvQ4MYM2p8mkvSNX.nMdocTHcQWEm3wPuD6vCX2zpTrNJclu', 'admin'),
+(10, 'Shalom', 'Shalom', 'Shalom.jsp@student.junia.com', '2023-03-16', '$2y$10$p/kDHom1GmuaMiDodH5nx.c4ty6i9iGzL9DWRxh0FA0kruXYdDNVa', 'admin'),
+(11, 'Broucqsault', 'Simon', 'simon.broucqsault@student.junia.com', '2004-09-07', '$2y$10$ywRFp32RFL8JfRVU0rY6UOOrq6qxwOS.aA.KhkVk3L/j4LD5Oo9Ka', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -98,13 +108,13 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `IdBar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IdBar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
