@@ -66,13 +66,13 @@
 				<!-- form contenant les points à modifier -->
 				<br><br>
 				<label>Adresse :</label>
-				<input type="text" name="adresse" required>
+				<input type="text" name="adresse" >
                 <br><br>
 				<label>Ville :</label>
-				<input type="text" name="ville" required>
+				<input type="text" name="ville" >
 				<br><br>
 				<label>Note:</label>
-  				<input type="number" name="note" required>
+  				<input type="number" name="note" >
 				<br><br>
 
 				<input type="submit" name="Modifier le bar"/>
@@ -88,14 +88,22 @@
 <?php
             // si on appuie sur le boutton "Modifier le bar"...
         	if(isset($_POST['Modifier_le_bar'])){ 
-
-				//récup du formulaire les nouvelles info du bar
-				$adresse = valider_donnees($_POST['adresse']);
-                $ville = valider_donnees($_POST['ville']); //on récupère les données du formulaire en les validant pour éviter les attaques
-				$note = valider_donnees($_POST['note']);
-				if($note>10) $note=10; //on empêche la note d'être supérieure à la note maximale
 				$bar=$_POST['bar'];
-                //requete pour modifier l'adresse et la ville dans la BD ( je suis pas sûr pour les AND)
+				$req="SELECT * FROM bar WHERE NomBar='$bar'"; //on récupère les infos du bar sélectionné
+				$resultat=$conn->query($req);
+				$row = mysqli_fetch_assoc($resultat);
+				//récup du formulaire les nouvelles info du bar
+				if($_POST['adresse']==NULL) $adresse=$row['AdresseBar']; //si l'adresse n'est pas modifiée, on garde l'ancienne
+				else $adresse = valider_donnees($_POST['adresse']);
+				
+				if($_POST['ville']==NULL) $ville=$row['VilleBar']; //si la ville n'est pas modifiée, on garde l'ancienne
+                else $ville = valider_donnees($_POST['ville']); //on récupère les données du formulaire en les validant pour éviter les attaques
+				
+				if($_POST['note']==NULL) $note=$row['Note']; //si la note n'est pas modifiée, on garde l'ancienne
+				else $note = valider_donnees($_POST['note']);
+				
+				if($note>10) $note=10; //on empêche la note d'être supérieure à la note maximale
+                //requete pour modifier l'adresse et la ville dans la BD
 				$reqSQL="UPDATE bar SET AdresseBar='$adresse', VilleBar='$ville', Note='$note' WHERE NomBar='$bar'"; //on modifie les données du bar sélectionné
 				$resultat=$conn->query($reqSQL);
 				
@@ -237,23 +245,24 @@
         if(isset($_POST['Modifier_le_client'])){ 
 
             //récup du formulaire les nouvelles valeurs du client
-			$reqSQL="SELECT * FROM client"; //on récupère tous les clients inscrits
+			$nom=$_POST['client'];
+
+			$reqSQL="SELECT * FROM client WHERE NOM='$nom'"; //on récupère tous les clients inscrits
 			$resultat=$conn->query($reqSQL);
 			$row = mysqli_fetch_assoc($resultat);
 
 			if ($_POST['prenom']==NULL) $prenom=$row['Prenom']; //si aucun prénom n'est fournit, on reprends l'actuel
-            else $prenom=$_POST['prenom'];
+            else $prenom=valider_donnees($_POST['prenom']);
 
 			if ($_POST['email']==NULL) $email=$row['Email'];
-			else $email=$_POST['email'];
+			else $email=valider_donnees($_POST['email']);
 			
 			if ($_POST['dateNaissance']==NULL) $dateNaissance=$row['DateNaissance'];
-            else $dateNaissance=$_POST['dateNaissance'];
+            else $dateNaissance=valider_donnees($_POST['dateNaissance']);
 
 			if(!isset($_POST['perm'])) $perm='client'; //si la case n'est pas cochée on ne met pas d'access admin au compte
 			else $perm=$_POST['perm']; //sinon on lui met des permissions admin
 
-			$nom=$_POST['client'];
 
 			echo '</br>';
             //récup du formulaire la ref du bar à modifier
