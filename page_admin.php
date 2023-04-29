@@ -209,13 +209,16 @@
 				<!-- form pour modifier le prénom, l'email et la date de naissance du client -->
 				<br><br>
 				<label>Prénom :</label>
-				<input type="text" name="prenom" required>
+				<input type="text" name="prenom" >
                 <br><br>
 				<label>Email :</label>
-				<input type="email" name="email" required>
+				<input type="email" name="email" >
                 <br><br>
 				<label>Date de naissance :</label>
-				<input type="date" name="dateNaissance" required>
+				<input type="date" name="dateNaissance" >
+				<label> Accès administrateur :</label>
+				<input type="checkbox" name="perm" value="admin">
+				<br><br>
 
 				<!-- on termine la modif -->
 				<br><br>
@@ -234,16 +237,31 @@
         if(isset($_POST['Modifier_le_client'])){ 
 
             //récup du formulaire les nouvelles valeurs du client
-            $prenom=$_POST['prenom'];
-            $email=$_POST['email'];
-            $dateNaissance=$_POST['dateNaissance'];
+			$reqSQL="SELECT * FROM client"; //on récupère tous les clients inscrits
+			$resultat=$conn->query($reqSQL);
+			$row = mysqli_fetch_assoc($resultat);
+
+			if ($_POST['prenom']==NULL) $prenom=$row['Prenom']; //si aucun prénom n'est fournit, on reprends l'actuel
+            else $prenom=$_POST['prenom'];
+
+			if ($_POST['email']==NULL) $email=$row['Email'];
+			else $email=$_POST['email'];
+			
+			if ($_POST['dateNaissance']==NULL) $dateNaissance=$row['DateNaissance'];
+            else $dateNaissance=$_POST['dateNaissance'];
+
+			if(!isset($_POST['perm'])) $perm='client'; //si la case n'est pas cochée on ne met pas d'access admin au compte
+			else $perm=$_POST['perm']; //sinon on lui met des permissions admin
+
 			$nom=$_POST['client'];
+
 			echo '</br>';
             //récup du formulaire la ref du bar à modifier
             $ref=$_POST['Modifier_le_client'];
 			echo '</br>';
-            // requete pour modifier les valeurs dans la BD 
-            $reqSQL="UPDATE client SET Prenom = '$prenom', Email = '$email', DateNaissance = '$dateNaissance' WHERE Nom = '$nom'";
+
+            // requete pour modifier les valeurs dans la BD
+            $reqSQL="UPDATE client SET Prenom = '$prenom', Email = '$email', DateNaissance = '$dateNaissance', perm='$perm' WHERE Nom = '$nom'";
 			echo '</br>';
             //exécuter la requête
             $resultat=$conn->query($reqSQL);
