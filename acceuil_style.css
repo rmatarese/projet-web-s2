@@ -1,0 +1,155 @@
+﻿main {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas: " titre titre "
+                         " conn  inscrip ";
+    column-gap: 20px;
+}
+
+body {
+    background-image: url("images/Bulles.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0%;
+}
+
+#titre {
+    grid-area: titre;
+    column-gap: 20px;
+    color: rgb(248, 202, 16);
+    text-align: center;
+    background-color: rgb(22, 25, 42);
+    ;
+    ;
+    ;
+    position: fixed;
+    margin-top: 0px;
+    padding-top: 30px;
+    height: 145px;
+    width: 100%;
+    z-index: 8;
+    font-size: 30px;
+}
+
+#Logo {
+    grid-area: titre;
+    grid-area: logo;
+    z-index: 8;
+    position: fixed;
+    margin-top: 25px;
+    margin-left: 30px;
+    width: 50px;
+    height: 50px;
+}
+
+
+
+#inscri {
+    grid-area: inscrip;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    width: 80%;
+    height: 320px;
+    margin-top: 20%;
+    background-image: url("images/MOMENTO.jpeg");
+    background-size: contain;
+    transition-property: background-image, cover;                                                                                      
+    transition-duration: 2s, 2s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#p3 {
+    background-color: rgb(22, 25, 42);
+    color: rgb(248, 202, 16);
+    grid-area: inscrip;
+    margin-top: 347px;
+    width: 80.5%;
+    height: 100px;
+    z-index: 1;
+    border-radius: 0px 0px 10px 10px;
+    font-size: 20px;
+}
+
+#inscri:hover {
+    background-image: url("images/MOMENTO2.jfif");
+    background-size: cover;
+}
+
+#connexion {
+    grid-area: conn;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    width: 80%;
+    height: 320px;
+    margin-top: 20%;
+    margin-bottom: 5%;
+    margin-left: auto;
+    background-image: url("images/Barcool.jpg");
+    background-size: cover;
+    transition-property: background-image, contain;
+    transition-duration: 2s, 2s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    z-index: 0;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#p2 {
+    background-color: rgb(22, 25, 42);
+    color: rgb(248, 202, 16);
+    grid-area: conn;
+    margin-top: 347px;
+    margin-left: auto;
+    width: 80%;
+    height: 100px;
+    z-index: 1;
+    border-radius: 0px 0px 10px 10px;
+    font-size: 20px;
+}
+
+#connexion:hover {
+    background-image: url("images/Barcool2.jpg");
+    background-size: contain;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+}
+
+@media (min-width:830px) {
+    #titre {
+        font-size: 50px;
+    }
+
+    #p1 {
+        font-size: 30px;
+    }
+
+    #p2 {
+        font-size: 30px;
+    }
+
+    #p3 {
+        font-size: 30px;
+    }
+
+    #inscription {
+        font-size: 30px;
+    }
+}
