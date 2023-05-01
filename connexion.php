@@ -28,10 +28,10 @@
 
 	/* Cas où l'utilisateur est déjà connecté*/
 	if (isset($_COOKIE['user_id'])) { //si le cookie est set, c'est que l'utilisateur est déjà connecté
-		echo "<p> Bonjour, vous êtes déjà connecté en tant que ".$_SESSION['username'].". </p>";
+		echo "<p> Bonjour, vous êtes déjà connecté en tant que ".$_COOKIE['user_id'].". </p>";
 		echo "<p>Vous pouvez vous déconnecter ou revenir sur la page d'accueil \n</p>";
 		echo "<a href='deconnexion.php'>Déconnexion</a>";
-		echo "<a href=acceuil.php> Retour acceuil </a>";
+		echo "<a href=page_client.php> Retour à la page principale </a>";
 		exit();
 	}
 	else {
@@ -75,7 +75,7 @@ if (isset($_POST['login'])) {
 			$_SESSION["perm"]=$row["perm"];
 	  
 			// Créer le cookie
-			  setcookie('user_id', $_SESSION["Id"], time() + 24*3600*7, '/'); //cookie de connexion, d'une durée d'une semaine
+			  setcookie('user_id', $_SESSION["username"], time() + 24*3600*7, '/'); //cookie de connexion, d'une durée d'une semaine
 	  
 		
 			// Rediriger vers la page appropriée
