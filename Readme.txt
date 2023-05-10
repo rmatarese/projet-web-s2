@@ -6,4 +6,4 @@ Identifiants compte client:
 Nom: Client
 Password: Client123
 
-Pour passer un compte en admin, il faut passer directement par la table SQL
+Pour passer un compte en admin, il faut passer par l'interface administrateur, sélectionner le compte choisit et lui accorder les permissions
